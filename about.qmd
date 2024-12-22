@@ -1,0 +1,21 @@
+---
+title: "About"
+image: assets/icon.png
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/SmangaNkosi
+    - icon: bluesky
+      text: Bluesky
+      href: https://bsky.app/profile/tseponkosi.bsky.social
+---
+
+Hi! I'm Tsepo Nkosi.
+
+I'm someone who loves exploring the world of machine learning and discovering how technology can solve real-world problems.
+This website is a place where I share my journey, document what I learn, and showcase some of the projects I'm working on.
+Feel free to look around the site.
+
+

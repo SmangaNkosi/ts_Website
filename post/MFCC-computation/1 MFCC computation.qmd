@@ -1,0 +1,40 @@
+---
+title: Computation of the MFCC feature extraction method
+subtitle: You Learn by Doing
+description: Brief summaries of various things I learned.
+image: original_audio_plot.png
+author: Tsepo Nkosi
+date: '2024-09-24'
+categories: [Signal processing, python, scipy]
+format: 
+  html:
+    math: true
+open-graph:
+  description: You Learn by Doing
+  image: original_audio_plot.png
+twitter-card:
+  description: You Learn by Doing
+  image: original_audio_plot.png
+---
+
+MFCC is a method of extracting feature that converts sound into a voice vector. This method provides a representation of the short-term power spectrum of the signal. The motivations for using MFCC is its closeness with human hearing.
+
+The steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3. DFT 4. Mel-filter bank 5. log 6. DCT
+
+![Steps for computing the MFCC](audio_processing_diagram.png)
+
+::: panel-tabset
+# Pre-emphasis
+
+This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such $y[n] = x[n] - a x[n-1]$ where $x[n]$ is the input audio signal, "$a$" is the filter constant, $a\in [0.9,1]$. $y[n]$ is the filtered audio signal.
+
+# Sampling & windowing
+
+This step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e. Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is $y[n] = x[n]\times w[n]$
+
+where $w[n]$ is the windowing function.
+
+# Discrete Fourier Transform (DFT)
+
+The DFT converts a signal from the time-domain into frequency-domain.
+:::
