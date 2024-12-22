@@ -11,6 +11,10 @@ website:
   
   navbar:
     right:
+      - text: Posts
+        href: post/
+      - text: Projects
+        href: projects/
       - about.qmd
       - icon: github
         href: https://github.com/SmangaNkosi

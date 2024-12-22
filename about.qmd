@@ -14,8 +14,4 @@ about:
 
 Hi! I'm Tsepo Nkosi.
 
-I'm someone who loves exploring the world of machine learning and discovering how technology can solve real-world problems.
-This website is a place where I share my journey, document what I learn, and showcase some of the projects I'm working on.
-Feel free to look around the site.
-
-
+I'm someone who loves exploring the world of machine learning and discovering how technology can solve real-world problems. This website is a place where I share my journey, document what I learn, and showcase some of the projects I'm working on. Feel free to look around the site.

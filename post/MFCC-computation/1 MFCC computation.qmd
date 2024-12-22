@@ -2,7 +2,7 @@
 title: Computation of the MFCC feature extraction method
 subtitle: You Learn by Doing
 description: Brief summaries of various things I learned.
-image: original_audio_plot.png
+image: original_audio_plot.png  # Ensure this image exists in the same folder as this .qmd file
 author: Tsepo Nkosi
 date: '2024-09-24'
 categories: [Signal processing, python, scipy]
@@ -11,10 +11,8 @@ format:
     math: true
 open-graph:
   description: You Learn by Doing
-  image: original_audio_plot.png
-twitter-card:
-  description: You Learn by Doing
-  image: original_audio_plot.png
+  image: original_audio_plot.png  # Ensure path is correct
+reading-time: 10 min
 ---
 
 MFCC is a method of extracting feature that converts sound into a voice vector. This method provides a representation of the short-term power spectrum of the signal. The motivations for using MFCC is its closeness with human hearing.
