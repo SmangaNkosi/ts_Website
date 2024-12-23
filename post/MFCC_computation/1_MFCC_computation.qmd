@@ -2,16 +2,16 @@
 title: Computation of the MFCC feature extraction method
 subtitle: You Learn by Doing
 description: Brief summaries of various things I learned.
-image: original_audio_plot.png  # Ensure this image exists in the same folder as this .qmd file
+image: mfcc2.jpg  
 author: Tsepo Nkosi
 date: '2024-09-24'
 categories: [Signal processing, python, scipy]
-format: 
+format:
   html:
     math: true
 open-graph:
   description: You Learn by Doing
-  image: original_audio_plot.png  # Ensure path is correct
+  image: mfcc2.jpg  
 reading-time: 10 min
 ---
 
@@ -24,7 +24,16 @@ The steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3
 ::: panel-tabset
 # Pre-emphasis
 
-This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such $y[n] = x[n] - a x[n-1]$ where $x[n]$ is the input audio signal, "$a$" is the filter constant, $a\in [0.9,1]$. $y[n]$ is the filtered audio signal.
+This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such $x_{pe}[n] = x_{in}[n] - \alpha x_{in}[n-1]$ where $x_{in}[n]$ is the input audio signal, "$\alpha$" is the filter constant, $a\in [0.9,1]$. $x_{pe}[n]$ is the filtered audio signal.
+
+The python implementation of the pre-emphasis filter 
+
+```{}
+x_ep = numpy.append(x_in[0], x_in[1:] - alpha * x_in[:-1])
+```
+
+for most speech processing contexts, alpha is usually sated to ```0.95 ``` or ```0.97 ```
+
 
 # Sampling & windowing
 

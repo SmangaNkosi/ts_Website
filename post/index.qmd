@@ -1,8 +1,8 @@
 ---
-title: "TS world"
+title: "My blog posts"
 listing:
   contents:
-    - post/MFCC_computation/1_MFCC_computation.qmd
+    - MFCC_computation/1_MFCC_computation.qmd
   sort: "date desc"
   type: default
   categories: true

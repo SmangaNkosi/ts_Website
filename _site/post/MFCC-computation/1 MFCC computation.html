@@ -229,6 +229,7 @@ window.Quarto = {
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such <span class="math inline">\(y[n] = x[n] - a x[n-1]\)</span> where <span class="math inline">\(x[n]\)</span> is the input audio signal, “<span class="math inline">\(a\)</span>” is the filter constant, <span class="math inline">\(a\in [0.9,1]\)</span>. <span class="math inline">\(y[n]\)</span> is the filtered audio signal.</p>
+<p>The python implementation of pre-emphasis</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>This step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e.&nbsp;Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is <span class="math inline">\(y[n] = x[n]\times w[n]\)</span></p>

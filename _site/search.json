@@ -1033,7 +1033,7 @@
     "href": "post/MFCC-computation/1 MFCC computation.html",
     "title": "Computation of the MFCC feature extraction method",
     "section": "",
-    "text": "MFCC is a method of extracting feature that converts sound into a voice vector. This method provides a representation of the short-term power spectrum of the signal. The motivations for using MFCC is its closeness with human hearing.\nThe steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3. DFT 4. Mel-filter bank 5. log 6. DCT\n\n\n\nSteps for computing the MFCC\n\n\n\nPre-emphasisSampling & windowingDiscrete Fourier Transform (DFT)\n\n\nThis step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such \\(y[n] = x[n] - a x[n-1]\\) where \\(x[n]\\) is the input audio signal, “\\(a\\)” is the filter constant, \\(a\\in [0.9,1]\\). \\(y[n]\\) is the filtered audio signal.\n\n\nThis step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e. Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is \\(y[n] = x[n]\\times w[n]\\)\nwhere \\(w[n]\\) is the windowing function.\n\n\nThe DFT converts a signal from the time-domain into frequency-domain."
+    "text": "MFCC is a method of extracting feature that converts sound into a voice vector. This method provides a representation of the short-term power spectrum of the signal. The motivations for using MFCC is its closeness with human hearing.\nThe steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3. DFT 4. Mel-filter bank 5. log 6. DCT\n\n\n\nSteps for computing the MFCC\n\n\n\nPre-emphasisSampling & windowingDiscrete Fourier Transform (DFT)\n\n\nThis step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such \\(y[n] = x[n] - a x[n-1]\\) where \\(x[n]\\) is the input audio signal, “\\(a\\)” is the filter constant, \\(a\\in [0.9,1]\\). \\(y[n]\\) is the filtered audio signal.\nThe python implementation of pre-emphasis\n\n\nThis step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e. Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is \\(y[n] = x[n]\\times w[n]\\)\nwhere \\(w[n]\\) is the windowing function.\n\n\nThe DFT converts a signal from the time-domain into frequency-domain."
   },
   {
     "objectID": "index.html#forblog",
@@ -1045,9 +1045,9 @@
   {
     "objectID": "post/index.html",
     "href": "post/index.html",
-    "title": "TS world",
+    "title": "My blog posts",
     "section": "",
-    "text": "No matching items"
+    "text": "Computation of the MFCC feature extraction method\n\n\nYou Learn by Doing\n\n\n\nSignal processing\n\n\npython\n\n\nscipy\n\n\n\nBrief summaries of various things I learned.\n\n\n\n\n\nSep 24, 2024\n\n\nTsepo Nkosi\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "projects/index.html",
@@ -1055,5 +1055,12 @@
     "title": "TS world",
     "section": "",
     "text": "No matching items"
+  },
+  {
+    "objectID": "post/MFCC_computation/1_MFCC_computation.html",
+    "href": "post/MFCC_computation/1_MFCC_computation.html",
+    "title": "Computation of the MFCC feature extraction method",
+    "section": "",
+    "text": "MFCC is a method of extracting feature that converts sound into a voice vector. This method provides a representation of the short-term power spectrum of the signal. The motivations for using MFCC is its closeness with human hearing.\nThe steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3. DFT 4. Mel-filter bank 5. log 6. DCT\n\n\n\nSteps for computing the MFCC\n\n\n\nPre-emphasisSampling & windowingDiscrete Fourier Transform (DFT)\n\n\nThis step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such \\(x_{pe}[n] = x_{in}[n] - \\alpha x_{in}[n-1]\\) where \\(x_{in}[n]\\) is the input audio signal, “\\(\\alpha\\)” is the filter constant, \\(a\\in [0.9,1]\\). \\(x_{pe}[n]\\) is the filtered audio signal.\nThe python implementation of the pre-emphasis filter\nx_ep = numpy.append(x_in[0], x_in[1:] - alpha * x_in[:-1])\nfor most speech processing contexts, alpha is usually sated to 0.95 or 0.97\n\n\nThis step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e. Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is \\(y[n] = x[n]\\times w[n]\\)\nwhere \\(w[n]\\) is the windowing function.\n\n\nThe DFT converts a signal from the time-domain into frequency-domain."
   }
 ]

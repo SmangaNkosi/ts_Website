@@ -1,0 +1,80 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Computation of the MFCC feature extraction method\n",
+        "subtitle: You Learn by Doing\n",
+        "description: Brief summaries of various things I learned.\n",
+        "image: mfcc2.jpg  \n",
+        "author: Tsepo Nkosi\n",
+        "date: '2024-09-24'\n",
+        "categories: [Signal processing, python, scipy]\n",
+        "format:\n",
+        "  html:\n",
+        "    math: true\n",
+        "open-graph:\n",
+        "  description: You Learn by Doing\n",
+        "  image: mfcc2.jpg  \n",
+        "reading-time: 10 min\n",
+        "---\n",
+        "\n",
+        "\n",
+        "MFCC is a method of extracting feature that converts sound into a voice vector. This method provides a representation of the short-term power spectrum of the signal. The motivations for using MFCC is its closeness with human hearing.\n",
+        "\n",
+        "The steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3. DFT 4. Mel-filter bank 5. log 6. DCT\n",
+        "\n",
+        "![Steps for computing the MFCC](audio_processing_diagram.png)\n",
+        "\n",
+        "::: panel-tabset\n",
+        "# Pre-emphasis\n",
+        "\n",
+        "This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such $x_{pe}[n] = x_{in}[n] - \\alpha x_{in}[n-1]$ where $x_{in}[n]$ is the input audio signal, \"$\\alpha$\" is the filter constant, $a\\in [0.9,1]$. $x_{pe}[n]$ is the filtered audio signal.\n",
+        "\n",
+        "The python implementation of the pre-emphasis filter \n"
+      ],
+      "id": "13d1ddaf"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "x_ep = numpy.append(x_in[0], x_in[1:] - alpha * x_in[:-1])"
+      ],
+      "id": "54bf4060",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "for most speech processing contexts, alpha is usually sated to ```0.95 ``` or ```0.97 ```\n",
+        "\n",
+        "\n",
+        "# Sampling & windowing\n",
+        "\n",
+        "This step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e. Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is $y[n] = x[n]\\times w[n]$\n",
+        "\n",
+        "where $w[n]$ is the windowing function.\n",
+        "\n",
+        "# Discrete Fourier Transform (DFT)\n",
+        "\n",
+        "The DFT converts a signal from the time-domain into frequency-domain.\n",
+        ":::"
+      ],
+      "id": "a1d4bcc1"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
