@@ -16,6 +16,8 @@ website:
       - text: Projects
         href: projects/
       - about.qmd
+      - icon: linkedin
+        href: https://www.linkedin.com/in/smangaliso-nkosi-1453072b8/
       - icon: github
         href: https://github.com/SmangaNkosi
       - text: BS

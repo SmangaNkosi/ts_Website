@@ -15,3 +15,17 @@ about:
 Hi! I'm Tsepo Nkosi.
 
 I'm someone who loves exploring the world of machine learning and discovering how technology can solve real-world problems. This website is a place where I share my journey, document what I learn, and showcase some of the projects I'm working on. Feel free to look around the site.
+
+### Education and Certifications
+
+- **[Advanced Statistics for Data Science](https://www.coursera.org/account/accomplishments/specialization/ZSJEELJ4PLAO)**  
+  
+
+### Skills
+- Statistics
+- Linear Regression
+- Statistical Hypothesis Testing
+- R Programming
+
+### Contact
+Feel free to reach out to me at [Tsepo.smangaliso.nkosi@outlook.com](mailto:Tsepo.smangaliso.nkosi@outlook.com) or connect with me on [LinkedIn or other platforms]

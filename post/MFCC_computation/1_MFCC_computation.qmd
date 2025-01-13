@@ -26,20 +26,46 @@ The steps of computing the MFCC are: 1. pre-emphasis 2. sampling and windowing 3
 
 This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such $x_{pe}[n] = x_{in}[n] - \alpha x_{in}[n-1]$ where $x_{in}[n]$ is the input audio signal, "$\alpha$" is the filter constant, $a\in [0.9,1]$. $x_{pe}[n]$ is the filtered audio signal.
 
-The python implementation of the pre-emphasis filter 
+The python implementation of the pre-emphasis filter
 
-```{}
+```         
 x_ep = numpy.append(x_in[0], x_in[1:] - alpha * x_in[:-1])
 ```
 
-for most speech processing contexts, alpha is usually sated to ```0.95 ``` or ```0.97 ```
+for most speech processing contexts, alpha is usually sated to `0.95` or `0.97`
+
+# Framing and Windowing
+
+As speech is not a stationary signal, it is divided into overlapped frames within which the signal is assumed to be stationary. For speech signal, the frames range between 20-40ms with 50% overlapped frames. If we choose a frame size of 20ms, ```f_size = 0.02```. then our overlap would be 10ms, ```f_stride = 0.01```.
+
+Mathematically framing is defined as $x_{\text{fw}}= [x_{pe}(n)w(pW - n)]*h(n)$ 
+where $w(n)$ is a windowed function of length  $W$.
+
+```{}
+f_length, f_step = f_size * sample_rate, f_stride * sample_rate 
+x_length = len(x_pe)
+f_length = int(round(f_length))
+f_step = int(round(f_step))
+num_f = int(numpy.ceil(float(numpy.abs(x_length - f_length)) / f_step)) 
+
+pad_x_length = num_f * f_step + f_length
+z = numpy.zeros((pad_x_length - x_length))
+pad_x = numpy.append(x_pe, z)
+
+indices = numpy.tile(numpy.arange(0, f_length), (num_f, 1)) + numpy.tile(numpy.arange(0,num_f * f_step, f_step), (f_length, 1)).T
+x_f = pad_signal[indices.astype(numpy.int32, copy=False)]
 
 
-# Sampling & windowing
+```
 
-This step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e. Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is $y[n] = x[n]\times w[n]$
+now we apply the hamming function
 
-where $w[n]$ is the windowing function.
+```{}
+
+x_fw *= numpy.hamming(f_length)
+
+```
+
 
 # Discrete Fourier Transform (DFT)
 

@@ -1,0 +1,20 @@
+---
+title: Linear regression model for air quality prediction
+subtitle: You Learn by Doing
+description: Brief summaries of various things I learned.
+image:   Air_Quality_cities_2012_2024.jpg
+author: Tsepo Nkosi
+date: '2025-01-10'
+categories: [Linear regression, Prediction, R, Environmental analysis]
+format:
+  html:
+    math: true
+open-graph:
+  description: You Learn by Doing
+  image:   Air_Quality_cities_2012_2024.jpg
+reading-time: 10 min
+---
+The air quality of 5 major US cities was collected over a period of 13 years, 2012 to 2024 on a day by day interval.
+These cities are New York, Los Angeles, Chicago, Houstan, and Phoenix. 
+
+Six predictors where mearsured, Pm2.5(particles smaller than 2.5 micrometers), Pm10(particles smaller than 10 micrometers), No2(Nitrogen dioxide in ppb), So2(Sulfur dioxide in ppb), co(Carbon monoxide in ppm), and Aqi(Air Quality Index)

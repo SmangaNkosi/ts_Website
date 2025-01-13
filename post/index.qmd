@@ -3,6 +3,7 @@ title: "My blog posts"
 listing:
   contents:
     - MFCC_computation/1_MFCC_computation.qmd
+    - Air_Quality_Model/Air_Quality_model.qmd
   sort: "date desc"
   type: default
   categories: true

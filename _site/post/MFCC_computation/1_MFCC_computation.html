@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-ZA" xml:lang="en-ZA"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -39,10 +39,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-87dd1418f1003a1b38738c0d01bfe40e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-2f72c913f013bd30d9ae7a609e2893a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -141,6 +141,11 @@ window.Quarto = {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/smangaliso-nkosi-1453072b8/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/SmangaNkosi"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
@@ -221,7 +226,7 @@ window.Quarto = {
 </figure>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Pre-emphasis</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Sampling &amp; windowing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Discrete Fourier Transform (DFT)</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Pre-emphasis</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Framing and Windowing</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Discrete Fourier Transform (DFT)</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>This step emphasizes the high-frequency component of our signal. The audio signal is passed through a highpass filter. Mathematically this is formulated as such <span class="math inline">\(x_{pe}[n] = x_{in}[n] - \alpha x_{in}[n-1]\)</span> where <span class="math inline">\(x_{in}[n]\)</span> is the input audio signal, “<span class="math inline">\(\alpha\)</span>” is the filter constant, <span class="math inline">\(a\in [0.9,1]\)</span>. <span class="math inline">\(x_{pe}[n]\)</span> is the filtered audio signal.</p>
@@ -230,8 +235,26 @@ window.Quarto = {
 <p>for most speech processing contexts, alpha is usually sated to <code>0.95</code> or <code>0.97</code></p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>This step divides the signal into segments and smooths their ends. The audio signal is divided into segments of length 20-30ms called frames. This segmenting of the audio signal may/will result in discontinuities or overlaps between successive frames. Windowing techniques are applied,i.e.&nbsp;Hamming, smoothing the ends of the frames thus avoiding discontinuities. Mathematically this is <span class="math inline">\(y[n] = x[n]\times w[n]\)</span></p>
-<p>where <span class="math inline">\(w[n]\)</span> is the windowing function.</p>
+<p>As speech is not a stationary signal, it is divided into overlapped frames within which the signal is assumed to be stationary. For speech signal, the frames range between 20-40ms with 50% overlapped frames. If we choose a frame size of 20ms, <code>f_size = 0.02</code>. then our overlap would be 10ms, <code>f_stride = 0.01</code>.</p>
+<p>Mathematically framing is defined as <span class="math inline">\(x_{\text{fw}}= [x_{pe}(n)w(pW - n)]*h(n)\)</span> where <span class="math inline">\(w(n)\)</span> is a windowed function of length <span class="math inline">\(W\)</span>.</p>
+<pre><code>f_length, f_step = f_size * sample_rate, f_stride * sample_rate 
+x_length = len(x_pe)
+f_length = int(round(f_length))
+f_step = int(round(f_step))
+num_f = int(numpy.ceil(float(numpy.abs(x_length - f_length)) / f_step)) 
+
+pad_x_length = num_f * f_step + f_length
+z = numpy.zeros((pad_x_length - x_length))
+pad_x = numpy.append(x_pe, z)
+
+indices = numpy.tile(numpy.arange(0, f_length), (num_f, 1)) + numpy.tile(numpy.arange(0,num_f * f_step, f_step), (f_length, 1)).T
+x_f = pad_signal[indices.astype(numpy.int32, copy=False)]
+
+</code></pre>
+<p>now we apply the hamming function</p>
+<pre><code>
+x_fw *= numpy.hamming(f_length)
+</code></pre>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>The DFT converts a signal from the time-domain into frequency-domain.</p>
@@ -325,8 +348,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -437,7 +458,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
